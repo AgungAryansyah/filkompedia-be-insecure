@@ -51,16 +51,11 @@ func NewAuthService(authRepository repository.IAuthRepository, userRepository re
 }
 
 func (s *AuthService) Register(registerReq *model.RegisterReq) (user *entity.User, err error) {
-	hashedpassword, err := s.Bcrypt.GenerateFromPassword(registerReq.Password)
-	if err != nil {
-		return nil, err
-	}
-
 	user = &entity.User{
 		Id:         uuid.New(),
 		Username:   registerReq.Username,
 		Email:      registerReq.Email,
-		Password:   hashedpassword,
+		Password:   registerReq.Password,
 		RoleId:     0,
 		IsVerified: false,
 	}
@@ -125,8 +120,7 @@ func (s *AuthService) Login(loginReq *model.LoginReq, ipAddress string, userAgen
 		return nil, &response.InvalidCredentials
 	}
 
-	err = s.Bcrypt.CompareAndHashPassword(user.Password, loginReq.Password)
-	if err != nil {
+	if user.Password != loginReq.Password {
 		return nil, &response.InvalidCredentials
 	}
 
