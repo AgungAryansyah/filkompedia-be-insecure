@@ -3,7 +3,6 @@ package repository
 import (
 	"database/sql"
 	"errors"
-	"fmt"
 
 	"github.com/AgungAryansyah/filkompedia-be-unsecure/entity"
 	"github.com/AgungAryansyah/filkompedia-be-unsecure/model"
@@ -59,8 +58,6 @@ func (r *UserRepository) GetUserByEmail(email string) (user *entity.User, err er
 
 	user = &entity.User{}
 	err = r.db.Get(user, query, email)
-
-	fmt.Println(err)
 
 	if errors.Is(err, sql.ErrNoRows) {
 		return nil, &response.UserNotFound
