@@ -3,7 +3,6 @@ package middleware
 import (
 	"github.com/AgungAryansyah/filkompedia-be-unsecure/model"
 	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/response"
-	"github.com/go-playground/validator"
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
 )
@@ -16,11 +15,6 @@ func (m *middleware) BookCommentCheck(ctx *fiber.Ctx) error {
 
 	createReq := &model.CreateComment{}
 	if err := ctx.BodyParser(createReq); err != nil {
-		return err
-	}
-
-	validate := validator.New()
-	if err := validate.Struct(createReq); err != nil {
 		return err
 	}
 

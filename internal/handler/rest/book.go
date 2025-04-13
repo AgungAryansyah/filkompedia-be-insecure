@@ -31,10 +31,6 @@ func (r *Rest) SearchBooks(ctx *fiber.Ctx) error {
 	bookSearch.PageSize = ctx.QueryInt("size", 9)
 	bookSearch.SearchParam = ctx.Query("search", "%")
 
-	if err := r.validator.Struct(bookSearch); err != nil {
-		return err
-	}
-
 	books, err := r.service.BookService.SearchBooks(bookSearch)
 	if err != nil {
 		return err
@@ -47,10 +43,6 @@ func (r *Rest) SearchBooks(ctx *fiber.Ctx) error {
 func (r *Rest) CreateBook(ctx *fiber.Ctx) error {
 	var create model.CreateBook
 	if err := ctx.BodyParser(&create); err != nil {
-		return err
-	}
-
-	if err := r.validator.Struct(create); err != nil {
 		return err
 	}
 
@@ -83,10 +75,6 @@ func (r *Rest) EditBook(ctx *fiber.Ctx) error {
 		return err
 	}
 
-	if err := r.validator.Struct(edit); err != nil {
-		return err
-	}
-
 	if err := r.service.BookService.EditBook(edit); err != nil {
 		return err
 	}
@@ -99,11 +87,6 @@ func (r *Rest) UploadBookCover(ctx *fiber.Ctx) error {
 	file, err := ctx.FormFile("file")
 	if err != nil {
 		return err
-	}
-
-	bookCover := model.Image{File: file}
-	if err := r.validator.Struct(bookCover); err != nil {
-		return &response.BadRequest
 	}
 
 	url, err := r.service.BookService.UploadBookCover(file)
