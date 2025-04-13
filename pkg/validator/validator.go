@@ -4,8 +4,8 @@ import (
 	"mime/multipart"
 	"time"
 
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/model"
 	"github.com/go-playground/validator/v10"
-	"github.com/yogarn/filkompedia-be/model"
 )
 
 func RegisterValidator(v *validator.Validate) {

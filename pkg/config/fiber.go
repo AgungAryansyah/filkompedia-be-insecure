@@ -1,9 +1,9 @@
 package config
 
 import (
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/response"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/yogarn/filkompedia-be/pkg/response"
 )
 
 func StartFiber() *fiber.App {

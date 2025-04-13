@@ -1,11 +1,11 @@
 package middleware
 
 import (
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/internal/service"
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/jwt"
+	monitoring "github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/prometheus"
 	"github.com/gofiber/fiber/v2"
 	"github.com/sirupsen/logrus"
-	"github.com/yogarn/filkompedia-be/internal/service"
-	"github.com/yogarn/filkompedia-be/pkg/jwt"
-	monitoring "github.com/yogarn/filkompedia-be/pkg/prometheus"
 )
 
 type IMiddleware interface {

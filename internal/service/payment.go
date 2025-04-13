@@ -7,12 +7,12 @@ import (
 	"os"
 	"time"
 
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/entity"
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/internal/repository"
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/model"
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/midtrans"
 	"github.com/google/uuid"
 	"github.com/midtrans/midtrans-go/snap"
-	"github.com/yogarn/filkompedia-be/entity"
-	"github.com/yogarn/filkompedia-be/internal/repository"
-	"github.com/yogarn/filkompedia-be/model"
-	"github.com/yogarn/filkompedia-be/pkg/midtrans"
 )
 
 type IPaymentService interface {

@@ -6,9 +6,9 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/model"
 	"github.com/google/uuid"
 	storage_go "github.com/supabase-community/storage-go"
-	"github.com/yogarn/filkompedia-be/model"
 )
 
 type Supabase struct {

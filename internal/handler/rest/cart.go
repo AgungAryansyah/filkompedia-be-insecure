@@ -3,11 +3,11 @@ package rest
 import (
 	"net/http"
 
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/entity"
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/model"
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/response"
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
-	"github.com/yogarn/filkompedia-be/entity"
-	"github.com/yogarn/filkompedia-be/model"
-	"github.com/yogarn/filkompedia-be/pkg/response"
 )
 
 func (r *Rest) GetUserCart(ctx *fiber.Ctx) error {

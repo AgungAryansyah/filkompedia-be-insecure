@@ -4,9 +4,9 @@ import (
 	"errors"
 	"os"
 
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/entity"
 	"github.com/midtrans/midtrans-go"
 	"github.com/midtrans/midtrans-go/snap"
-	"github.com/yogarn/filkompedia-be/entity"
 )
 
 type IMidtrans interface {

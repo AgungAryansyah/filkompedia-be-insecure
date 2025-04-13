@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"strings"
 
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/response"
 	"github.com/gofiber/fiber/v2"
 	"github.com/sirupsen/logrus"
-	"github.com/yogarn/filkompedia-be/pkg/response"
 )
 
 func (m *middleware) LogrusMiddleware(ctx *fiber.Ctx) error {

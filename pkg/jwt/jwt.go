@@ -6,9 +6,9 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/response"
 	lib_jwt "github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
-	"github.com/yogarn/filkompedia-be/pkg/response"
 )
 
 type IJwt interface {

@@ -1,6 +1,6 @@
 package main
 
-import "github.com/yogarn/filkompedia-be/pkg/config"
+import "github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/config"
 
 func main() {
 	config.LoadEnv()

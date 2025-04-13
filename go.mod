@@ -1,4 +1,4 @@
-module github.com/yogarn/filkompedia-be
+module github.com/AgungAryansyah/filkompedia-be-unsecure
 
 go 1.23.6
 
@@ -15,6 +15,7 @@ require (
 	github.com/midtrans/midtrans-go v1.3.8
 	github.com/prometheus/client_golang v1.21.1
 	github.com/sirupsen/logrus v1.9.3
+	github.com/supabase-community/storage-go v0.7.0
 	golang.org/x/crypto v0.36.0
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1
 )
@@ -37,7 +38,6 @@ require (
 	github.com/prometheus/common v0.62.0 // indirect
 	github.com/prometheus/procfs v0.15.1 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
-	github.com/supabase-community/storage-go v0.7.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.51.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect

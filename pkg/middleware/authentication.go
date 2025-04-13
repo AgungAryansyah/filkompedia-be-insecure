@@ -1,9 +1,9 @@
 package middleware
 
 import (
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/response"
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
-	"github.com/yogarn/filkompedia-be/pkg/response"
 )
 
 func (m *middleware) Authenticate(ctx *fiber.Ctx) error {

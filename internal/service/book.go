@@ -3,12 +3,12 @@ package service
 import (
 	"mime/multipart"
 
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/entity"
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/internal/repository"
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/model"
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/response"
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/supabase"
 	"github.com/google/uuid"
-	"github.com/yogarn/filkompedia-be/entity"
-	"github.com/yogarn/filkompedia-be/internal/repository"
-	"github.com/yogarn/filkompedia-be/model"
-	"github.com/yogarn/filkompedia-be/pkg/response"
-	"github.com/yogarn/filkompedia-be/pkg/supabase"
 )
 
 type IBookService interface {

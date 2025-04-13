@@ -1,8 +1,8 @@
 package model
 
 import (
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/entity"
 	"github.com/google/uuid"
-	"github.com/yogarn/filkompedia-be/entity"
 )
 
 type ProfilesReq struct {

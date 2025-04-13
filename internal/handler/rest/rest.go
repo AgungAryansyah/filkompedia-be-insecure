@@ -1,10 +1,10 @@
 package rest
 
 import (
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/internal/service"
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/middleware"
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
-	"github.com/yogarn/filkompedia-be/internal/service"
-	"github.com/yogarn/filkompedia-be/pkg/middleware"
 )
 
 type Rest struct {

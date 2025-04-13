@@ -4,9 +4,9 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/response"
 	"github.com/gofiber/fiber/v2"
 	"github.com/prometheus/client_golang/prometheus"
-	"github.com/yogarn/filkompedia-be/pkg/response"
 )
 
 func (m *middleware) PromMiddleware(c *fiber.Ctx) error {
