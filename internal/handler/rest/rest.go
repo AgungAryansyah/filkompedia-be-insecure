@@ -37,12 +37,12 @@ func mountAuth(routerGroup fiber.Router, r *Rest) {
 
 func mountUser(routerGroup fiber.Router, r *Rest) {
 	users := routerGroup.Group("/users")
-	users.Get("/", r.middleware.Authenticate, r.middleware.Authorize([]int{1}), r.GetAllUserProfile)
+	users.Get("/", r.middleware.Authenticate, r.GetAllUserProfile)
 	users.Get("/me", r.middleware.Authenticate, r.GetMe)
 	users.Get("/:userId", r.GetUserProfile)
-	users.Put("/role", r.middleware.Authenticate, r.middleware.Authorize([]int{1}), r.UpdateRole)
+	users.Put("/role", r.middleware.Authenticate, r.UpdateRole)
 	users.Patch("/", r.middleware.Authenticate, r.EditProfile)
-	users.Delete("/:userId", r.middleware.Authenticate, r.middleware.AuthorizeOrItself([]int{1}), r.DeleteUser)
+	users.Delete("/:userId", r.middleware.Authenticate, r.DeleteUser)
 	users.Post("/picture", r.middleware.Authenticate, r.UploadProfilePicture)
 }
 
@@ -50,10 +50,10 @@ func mountBook(routerGroup fiber.Router, r *Rest) {
 	books := routerGroup.Group("/books")
 	books.Get("/", r.middleware.Authenticate, r.SearchBooks)
 	books.Get("/:id", r.middleware.Authenticate, r.GetBook)
-	books.Post("/", r.middleware.Authenticate, r.middleware.Authorize([]int{1}), r.CreateBook)
-	books.Patch("/", r.middleware.Authenticate, r.middleware.Authorize([]int{1}), r.EditBook)
-	books.Delete("/:id", r.middleware.Authenticate, r.middleware.Authorize([]int{1}), r.DeleteBook)
-	books.Post("/cover", r.middleware.Authenticate, r.middleware.Authorize([]int{1}), r.UploadBookCover)
+	books.Post("/", r.middleware.Authenticate, r.CreateBook)
+	books.Patch("/", r.middleware.Authenticate, r.EditBook)
+	books.Delete("/:id", r.middleware.Authenticate, r.DeleteBook)
+	books.Post("/cover", r.middleware.Authenticate, r.UploadBookCover)
 }
 
 func mountComment(routerGroup fiber.Router, r *Rest) {
@@ -71,7 +71,7 @@ func mountCart(routerGroup fiber.Router, r *Rest) {
 	carts := routerGroup.Group("/carts")
 	carts.Use(r.middleware.Authenticate)
 
-	carts.Get("/user/:userId", r.middleware.Authorize([]int{1}), r.GetUserCartAdmin)
+	carts.Get("/user/:userId", r.GetUserCartAdmin)
 	carts.Get("/user", r.GetUserCart)
 	carts.Get("/:cartId", r.GetCart)
 	carts.Post("/", r.AddToCart)
@@ -83,7 +83,7 @@ func mountCheckout(routerGroup fiber.Router, r *Rest) {
 	checkouts := routerGroup.Group("/checkouts")
 	checkouts.Use(r.middleware.Authenticate)
 
-	checkouts.Get("/user/:userId", r.middleware.Authorize([]int{1}), r.GetUserCheckoutsAdmin)
+	checkouts.Get("/user/:userId", r.GetUserCheckoutsAdmin)
 	checkouts.Get("/user", r.GetUserCheckouts)
 	checkouts.Get("/:checkoutId", r.GetCheckoutCarts)
 	checkouts.Post("/", r.Checkout)
@@ -94,8 +94,8 @@ func mountPayment(routerGroup fiber.Router, r *Rest) {
 
 	payments.Post("/webhook", r.HandleMidtransWebhook)
 	payments.Get("/user", r.middleware.Authenticate, r.GetPaymentByUser)
-	payments.Get("/:id", r.middleware.Authenticate, r.middleware.Authorize([]int{1}), r.GetPayment)
-	payments.Get("/", r.middleware.Authenticate, r.middleware.Authorize([]int{1}), r.GetPayments)
+	payments.Get("/:id", r.middleware.Authenticate, r.GetPayment)
+	payments.Get("/", r.middleware.Authenticate, r.GetPayments)
 	payments.Get("/book/:id", r.middleware.Authenticate, r.CheckUserBookPurchase)
 	payments.Get("/checkout/:id", r.middleware.Authenticate, r.GetPaymentByCheckout)
 }
