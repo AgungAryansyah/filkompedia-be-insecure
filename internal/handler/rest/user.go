@@ -5,7 +5,6 @@ import (
 
 	"github.com/AgungAryansyah/filkompedia-be-unsecure/model"
 	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/response"
-	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
 )
@@ -61,11 +60,6 @@ func (r *Rest) UpdateRole(ctx *fiber.Ctx) (err error) {
 		return err
 	}
 
-	validate := validator.New()
-	if err := validate.Struct(roleReq); err != nil {
-		return err
-	}
-
 	if err := r.service.UserService.UpdateRole(roleReq); err != nil {
 		return err
 	}
@@ -94,10 +88,6 @@ func (r *Rest) EditProfile(ctx *fiber.Ctx) error {
 	}
 	edit.Id = userId
 
-	if err := r.validator.Struct(edit); err != nil {
-		return err
-	}
-
 	if err := r.service.UserService.EditProfile(&edit); err != nil {
 		return err
 	}
@@ -125,11 +115,6 @@ func (r *Rest) UploadProfilePicture(ctx *fiber.Ctx) error {
 	file, err := ctx.FormFile("file")
 	if err != nil {
 		return err
-	}
-
-	profilePicture := model.Image{File: file}
-	if err := r.validator.Struct(profilePicture); err != nil {
-		return &response.BadRequest
 	}
 
 	url, err := r.service.UserService.UploadProfilePicture(file)

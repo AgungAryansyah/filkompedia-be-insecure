@@ -1,10 +1,7 @@
 package service
 
 import (
-	"crypto/sha512"
-	"encoding/hex"
 	"errors"
-	"os"
 	"time"
 
 	"github.com/AgungAryansyah/filkompedia-be-unsecure/entity"
@@ -98,31 +95,6 @@ func (s *PaymentService) UpdatePaymentStatus(PaymentDetails map[string]any) erro
 
 	if payment, err := s.paymentRepo.GetPayment(paymentId); err != nil || payment == nil {
 		return err
-	}
-
-	statusCode, ok := PaymentDetails["status_code"].(string)
-	if !ok {
-		return errors.New("invalid payment details")
-	}
-
-	grossAmount, ok := PaymentDetails["gross_amount"].(string)
-	if !ok {
-		return errors.New("invalid payment details")
-	}
-
-	serverKey := os.Getenv("MIDTRANS_SERVER_KEY")
-
-	signatureKey, ok := PaymentDetails["signature_key"].(string)
-	if !ok {
-		return errors.New("invalid payment details")
-	}
-
-	hash := sha512.New()
-	hash.Write([]byte(paymentIDs + statusCode + grossAmount + serverKey))
-	verify := hex.EncodeToString(hash.Sum(nil))
-
-	if signatureKey != verify {
-		return errors.New("invalid payment details")
 	}
 
 	//todo improve this

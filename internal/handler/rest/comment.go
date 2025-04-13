@@ -5,7 +5,6 @@ import (
 
 	"github.com/AgungAryansyah/filkompedia-be-unsecure/model"
 	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/response"
-	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
 )
@@ -48,11 +47,6 @@ func (r *Rest) CreateComment(ctx *fiber.Ctx) error {
 		return err
 	}
 
-	validate := validator.New()
-	if err := validate.Struct(createReq); err != nil {
-		return err
-	}
-
 	userId, ok := ctx.Locals("userId").(uuid.UUID)
 	if !ok {
 		return &response.Unauthorized
@@ -81,11 +75,6 @@ func (r *Rest) UpdateComment(ctx *fiber.Ctx) error {
 
 	updateReq := &model.UpdateComment{}
 	if err := ctx.BodyParser(updateReq); err != nil {
-		return err
-	}
-
-	validate := validator.New()
-	if err := validate.Struct(updateReq); err != nil {
 		return err
 	}
 

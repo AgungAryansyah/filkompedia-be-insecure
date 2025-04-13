@@ -8,7 +8,6 @@ import (
 
 	"github.com/AgungAryansyah/filkompedia-be-unsecure/model"
 	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/response"
-	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
 )
@@ -16,11 +15,6 @@ import (
 func (r *Rest) Register(ctx *fiber.Ctx) (err error) {
 	registerReq := &model.RegisterReq{}
 	if err := ctx.BodyParser(registerReq); err != nil {
-		return err
-	}
-
-	validate := validator.New()
-	if err := validate.Struct(registerReq); err != nil {
 		return err
 	}
 
@@ -39,11 +33,6 @@ func (r *Rest) SendOtp(ctx *fiber.Ctx) (err error) {
 		return err
 	}
 
-	validate := validator.New()
-	if err := validate.Struct(otpReq); err != nil {
-		return err
-	}
-
 	err = r.service.AuthService.SendOTP(otpReq.Email)
 	if err != nil {
 		return err
@@ -59,11 +48,6 @@ func (r *Rest) VerifyOtp(ctx *fiber.Ctx) (err error) {
 		return err
 	}
 
-	validate := validator.New()
-	if err := validate.Struct(OtpVerifyReq); err != nil {
-		return err
-	}
-
 	err = r.service.AuthService.VerifyOTP(OtpVerifyReq.Email, OtpVerifyReq.Otp)
 	if err != nil {
 		return err
@@ -76,11 +60,6 @@ func (r *Rest) VerifyOtp(ctx *fiber.Ctx) (err error) {
 func (r *Rest) Login(ctx *fiber.Ctx) (err error) {
 	loginReq := &model.LoginReq{}
 	if err := ctx.BodyParser(loginReq); err != nil {
-		return err
-	}
-
-	validate := validator.New()
-	if err := validate.Struct(loginReq); err != nil {
 		return err
 	}
 
