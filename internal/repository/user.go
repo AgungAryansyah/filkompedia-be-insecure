@@ -3,7 +3,6 @@ package repository
 import (
 	"database/sql"
 	"errors"
-	"fmt"
 
 	"github.com/AgungAryansyah/filkompedia-be-unsecure/entity"
 	"github.com/AgungAryansyah/filkompedia-be-unsecure/model"
@@ -89,8 +88,6 @@ func (r *UserRepository) UpdateRole(userId uuid.UUID, roleId int) error {
 
 func (r *UserRepository) EditUser(edit *model.EditProfile) error {
 	query := `UPDATE users SET username = ` + edit.Username + ` profile_picture = ` + edit.ProfilePicture + ` WHERE id = ` + edit.Id.String()
-
-	fmt.Println(query)
 
 	_, err := r.db.Exec(query)
 	return err
