@@ -9,6 +9,13 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+func GetRealIP(ctx *fiber.Ctx) string {
+	if forwardedFor := ctx.Get("X-Forwarded-For"); forwardedFor != "" {
+		return strings.Split(forwardedFor, ",")[0]
+	}
+	return ctx.IP()
+}
+
 func (m *middleware) LogrusMiddleware(ctx *fiber.Ctx) error {
 	start := ctx.Context().Time()
 
@@ -25,12 +32,14 @@ func (m *middleware) LogrusMiddleware(ctx *fiber.Ctx) error {
 	err := ctx.Next()
 	statusCode, _ := response.GetErrorInfo(err)
 
+	clientIp := GetRealIP(ctx)
+
 	entry := m.logger.WithFields(logrus.Fields{
 		"method":    ctx.Method(),
 		"path":      ctx.Path(),
 		"status":    statusCode,
 		"latency":   ctx.Context().Time().Sub(start),
-		"ip":        ctx.IP(),
+		"ip":        clientIp,
 		"userAgent": ctx.Get("User-Agent"),
 		"body":      sanitizedBody,
 	})
