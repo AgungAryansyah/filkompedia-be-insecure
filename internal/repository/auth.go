@@ -6,8 +6,8 @@ import (
 	"errors"
 	"time"
 
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/entity"
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/response"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/entity"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/pkg/response"
 	"github.com/go-redis/redis/v8"
 	"github.com/google/uuid"
 	"github.com/jmoiron/sqlx"
@@ -202,4 +202,17 @@ func (r *AuthRepository) ChangePassword(email, password string) error {
 	}
 
 	return nil
+}
+
+func (r *AuthRepository) CheckUserPassword(email, password string) (bool, error) {
+	query := `SELECT * FROM users WHERE email = $1 and password = $2`
+
+	user := &entity.User{}
+	err := r.db.Get(user, query, email)
+
+	if errors.Is(err, sql.ErrNoRows) {
+		return false, &response.UserNotFound
+	}
+
+	return true, err
 }

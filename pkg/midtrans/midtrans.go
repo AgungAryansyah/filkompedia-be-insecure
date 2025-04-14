@@ -4,7 +4,7 @@ import (
 	"errors"
 	"os"
 
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/entity"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/entity"
 	"github.com/midtrans/midtrans-go"
 	"github.com/midtrans/midtrans-go/snap"
 )

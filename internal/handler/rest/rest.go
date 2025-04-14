@@ -1,8 +1,8 @@
 package rest
 
 import (
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/internal/service"
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/middleware"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/internal/service"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/pkg/middleware"
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
 )

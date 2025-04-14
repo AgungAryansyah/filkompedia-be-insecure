@@ -1,9 +1,8 @@
-module github.com/AgungAryansyah/filkompedia-be-unsecure
+module github.com/AgungAryansyah/filkompedia-be-insecure
 
 go 1.23.6
 
 require (
-	github.com/go-playground/validator v9.31.0+incompatible
 	github.com/go-playground/validator/v10 v10.25.0
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/gofiber/fiber/v2 v2.52.6
@@ -45,5 +44,4 @@ require (
 	golang.org/x/sys v0.31.0 // indirect
 	golang.org/x/text v0.23.0 // indirect
 	google.golang.org/protobuf v1.36.1 // indirect
-	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
 )

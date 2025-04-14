@@ -1,10 +1,10 @@
 package service
 
 import (
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/entity"
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/internal/repository"
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/model"
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/response"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/entity"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/internal/repository"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/model"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/pkg/response"
 	"github.com/google/uuid"
 )
 

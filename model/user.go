@@ -1,7 +1,7 @@
 package model
 
 import (
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/entity"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/entity"
 	"github.com/google/uuid"
 )
 

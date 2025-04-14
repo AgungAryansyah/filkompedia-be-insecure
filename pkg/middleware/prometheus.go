@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/response"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/pkg/response"
 	"github.com/gofiber/fiber/v2"
 	"github.com/prometheus/client_golang/prometheus"
 )
