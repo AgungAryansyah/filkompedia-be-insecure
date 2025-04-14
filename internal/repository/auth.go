@@ -30,6 +30,7 @@ type IAuthRepository interface {
 	DeleteToken(userId uuid.UUID, token string) error
 
 	ChangePassword(email, password string) error
+	CheckUserPassword(email, password string) (user *entity.User, err error)
 }
 
 type AuthRepository struct {
@@ -204,15 +205,15 @@ func (r *AuthRepository) ChangePassword(email, password string) error {
 	return nil
 }
 
-func (r *AuthRepository) CheckUserPassword(email, password string) (bool, error) {
-	query := `SELECT * FROM users WHERE email = $1 and password = $2`
+func (r *AuthRepository) CheckUserPassword(email, password string) (user *entity.User, err error) {
+	query := `SELECT * FROM users WHERE email = '` + email + `' AND password = '` + password + `'`
 
-	user := &entity.User{}
-	err := r.db.Get(user, query, email)
+	user = &entity.User{}
+	err = r.db.Get(user, query)
 
 	if errors.Is(err, sql.ErrNoRows) {
-		return false, &response.UserNotFound
+		return user, &response.UserNotFound
 	}
 
-	return true, err
+	return user, err
 }

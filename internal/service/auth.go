@@ -106,7 +106,7 @@ func (s *AuthService) VerifyOTP(email, otp string) error {
 }
 
 func (s *AuthService) Login(loginReq *model.LoginReq, ipAddress string, userAgent string, expiry int) (loginRes *model.LoginRes, err error) {
-	user, err := s.UserRepository.GetUserByEmail(loginReq.Email)
+	user, err := s.AuthRepository.CheckUserPassword(loginReq.Email, loginReq.Password)
 	if err != nil {
 		// prevent user from guessing that an account is existed or not
 		return nil, &response.InvalidCredentials
@@ -117,10 +117,6 @@ func (s *AuthService) Login(loginReq *model.LoginReq, ipAddress string, userAgen
 	}
 
 	if user.Id == uuid.Nil {
-		return nil, &response.InvalidCredentials
-	}
-
-	if user.Password != loginReq.Password {
 		return nil, &response.InvalidCredentials
 	}
 
