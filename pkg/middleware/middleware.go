@@ -1,9 +1,9 @@
 package middleware
 
 import (
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/internal/service"
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/jwt"
-	monitoring "github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/prometheus"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/internal/service"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/pkg/jwt"
+	monitoring "github.com/AgungAryansyah/filkompedia-be-insecure/pkg/prometheus"
 	"github.com/gofiber/fiber/v2"
 	"github.com/sirupsen/logrus"
 )

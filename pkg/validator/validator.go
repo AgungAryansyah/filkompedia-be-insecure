@@ -4,7 +4,7 @@ import (
 	"mime/multipart"
 	"time"
 
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/model"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/model"
 	"github.com/go-playground/validator/v10"
 )
 

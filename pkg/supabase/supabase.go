@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/model"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/model"
 	"github.com/google/uuid"
 	storage_go "github.com/supabase-community/storage-go"
 )

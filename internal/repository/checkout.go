@@ -4,8 +4,8 @@ import (
 	"database/sql"
 	"errors"
 
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/entity"
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/response"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/entity"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/pkg/response"
 	"github.com/google/uuid"
 	"github.com/jmoiron/sqlx"
 )

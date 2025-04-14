@@ -9,13 +9,13 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/entity"
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/internal/repository"
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/model"
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/bcrypt"
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/jwt"
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/response"
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/smtp"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/entity"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/internal/repository"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/model"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/pkg/bcrypt"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/pkg/jwt"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/pkg/response"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/pkg/smtp"
 	"github.com/google/uuid"
 )
 
@@ -106,7 +106,7 @@ func (s *AuthService) VerifyOTP(email, otp string) error {
 }
 
 func (s *AuthService) Login(loginReq *model.LoginReq, ipAddress string, userAgent string, expiry int) (loginRes *model.LoginRes, err error) {
-	user, err := s.UserRepository.GetUserByEmail(loginReq.Email)
+	user, err := s.AuthRepository.CheckUserPassword(loginReq.Email, loginReq.Password)
 	if err != nil {
 		// prevent user from guessing that an account is existed or not
 		return nil, &response.InvalidCredentials
@@ -117,10 +117,6 @@ func (s *AuthService) Login(loginReq *model.LoginReq, ipAddress string, userAgen
 	}
 
 	if user.Id == uuid.Nil {
-		return nil, &response.InvalidCredentials
-	}
-
-	if user.Password != loginReq.Password {
 		return nil, &response.InvalidCredentials
 	}
 

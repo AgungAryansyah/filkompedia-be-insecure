@@ -1,12 +1,12 @@
 package service
 
 import (
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/internal/repository"
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/bcrypt"
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/jwt"
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/midtrans"
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/smtp"
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/supabase"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/internal/repository"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/pkg/bcrypt"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/pkg/jwt"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/pkg/midtrans"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/pkg/smtp"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/pkg/supabase"
 )
 
 type Service struct {

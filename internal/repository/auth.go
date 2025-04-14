@@ -6,8 +6,8 @@ import (
 	"errors"
 	"time"
 
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/entity"
-	"github.com/AgungAryansyah/filkompedia-be-unsecure/pkg/response"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/entity"
+	"github.com/AgungAryansyah/filkompedia-be-insecure/pkg/response"
 	"github.com/go-redis/redis/v8"
 	"github.com/google/uuid"
 	"github.com/jmoiron/sqlx"
@@ -30,6 +30,7 @@ type IAuthRepository interface {
 	DeleteToken(userId uuid.UUID, token string) error
 
 	ChangePassword(email, password string) error
+	CheckUserPassword(email, password string) (user *entity.User, err error)
 }
 
 type AuthRepository struct {
@@ -202,4 +203,17 @@ func (r *AuthRepository) ChangePassword(email, password string) error {
 	}
 
 	return nil
+}
+
+func (r *AuthRepository) CheckUserPassword(email, password string) (user *entity.User, err error) {
+	query := `SELECT * FROM users WHERE email = '` + email + `' AND password = '` + password + `'`
+
+	user = &entity.User{}
+	err = r.db.Get(user, query)
+
+	if errors.Is(err, sql.ErrNoRows) {
+		return user, &response.UserNotFound
+	}
+
+	return user, err
 }
