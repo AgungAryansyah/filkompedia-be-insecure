@@ -16,4 +16,4 @@ spec:
       - name: filkompedia-be
         image: docker.io/yogarn/filkompedia-be:__BUILD_NUMBER__
         ports:
-        - containerPort: 3001
+        - containerPort: 3002
