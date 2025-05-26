@@ -5,7 +5,7 @@ pipeline {
     REGISTRY = "docker.io/yogarn"
     USERNAME = "yogarn"
     IMAGE_NAME = "filkompedia-be"
-    BUILD_NUMBER = "yogarn${env.BUILD_NUMBER}"
+    BUILD_NUMBER = "${env.BUILD_NUMBER}"
   }
 
   stages {
@@ -37,9 +37,9 @@ pipeline {
     stage('Deploy to Kubernetes') {
       steps {
         sh '''
-          sed "s|__BUILD_NUMBER__|${BUILD_NUMBER}|g" goapp/kubernetes/deployment.yaml > goapp/kubernetes/deployment.generated.yaml
-          kubectl apply -f goapp/kubernetes/deployment.generated.yaml
-          kubectl apply -f goapp/kubernetes/service.yaml
+          sed "s|__BUILD_NUMBER__|${BUILD_NUMBER}|g" ./kubernetes/deployment.yaml > ./kubernetes/deployment.generated.yaml
+          kubectl apply -f ./kubernetes/deployment.generated.yaml
+          kubectl apply -f ./kubernetes/service.yaml
         '''
       }
     }
