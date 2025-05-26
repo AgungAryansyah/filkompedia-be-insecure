@@ -26,7 +26,7 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: 'docker-registry-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
           sh '''
             echo "$PASS" | docker login ${REGISTRY} -u "$USER" --password-stdin
-	    docker tag ${IMAGE_NAME} ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER}
+	    docker tag ${REGISTRY}/${IMAGE_NAME} ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER}
             docker push ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER}
             docker logout ${REGISTRY}
           '''
