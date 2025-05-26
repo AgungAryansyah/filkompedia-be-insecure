@@ -26,7 +26,7 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: 'docker-registry-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
           sh '''
             echo "$PASS" | docker login ${REGISTRY} -u "$USER" --password-stdin
-	    docker tag ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER} ${REGISTRY}/${IMAGE_NAME}:filkompedia${BUILD_NUMBER}
+	    docker tag ${REGISTRY}/${IMAGE_NAME}:filkompedia${BUILD_NUMBER} ${REGISTRY}/${IMAGE_NAME}:filkompedia${BUILD_NUMBER}
             docker push ${REGISTRY}/${IMAGE_NAME}:filkompedia${BUILD_NUMBER}
             docker logout ${REGISTRY}
           '''
