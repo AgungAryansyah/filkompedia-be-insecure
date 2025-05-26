@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    REGISTRY = "docker.io/yogarn"
+    REGISTRY = "registry.docker.io/yogarn"
     USERNAME = "yogarn"
     IMAGE_NAME = "filkompedia-be"
     BUILD_NUMBER = "${env.BUILD_NUMBER}"
@@ -17,7 +17,7 @@ pipeline {
 
     stage('Build Docker Image') {
       steps {
-        sh 'docker build -t ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER} .'
+        sh 'docker build -t ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER} .'
       }
     }
 
@@ -25,9 +25,9 @@ pipeline {
       steps {
         withCredentials([usernamePassword(credentialsId: 'docker-registry-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
           sh '''
-            echo "$PASS" | docker login ${REGISTRY} -u "$USER" --password-stdin docker.io
-	    docker tag ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER} ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER}
-            docker push ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER}
+            echo "$PASS" | docker login ${REGISTRY} -u "$USER" --password-stdin
+	    docker tag ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER} ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER}
+            docker push ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER}
             docker logout ${REGISTRY}
           '''
         }
