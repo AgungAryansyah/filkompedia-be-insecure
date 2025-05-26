@@ -14,19 +14,9 @@ pipeline {
       }
     }
 
-   stage('Build Go App') {
-      steps {
-        sh '''
-          go mod init filkompedia-be || true
-          go mod tidy
-          GOOS=linux GOARCH=amd64 go build -o main .
-        '''
-      }
-    }
-
     stage('Build Docker Image') {
       steps {
-        sh 'docker build -t ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER} ./filkompedia-be'
+        sh 'docker build -t ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER} .'
       }
     }
 
@@ -62,3 +52,4 @@ pipeline {
     }
   }
 }
+
