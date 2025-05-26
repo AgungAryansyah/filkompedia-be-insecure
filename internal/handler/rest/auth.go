@@ -146,7 +146,7 @@ func (r *Rest) ExchangeToken(ctx *fiber.Ctx) (err error) {
 		Value:    jwtToken,
 		Expires:  time.Now().Add(time.Duration(expiresIn) * time.Second),
 		HTTPOnly: true,
-		Secure:   true,
+		Secure:   false,
 		Path:     "/",
 	})
 
@@ -155,7 +155,7 @@ func (r *Rest) ExchangeToken(ctx *fiber.Ctx) (err error) {
 		Value:    newToken,
 		Expires:  time.Now().Add(time.Duration(refreshTokenExpiresIn) * time.Second),
 		HTTPOnly: true,
-		Secure:   true,
+		Secure:   false,
 		Path:     "/",
 	})
 
