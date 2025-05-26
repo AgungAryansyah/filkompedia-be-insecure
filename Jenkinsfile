@@ -17,7 +17,6 @@ pipeline {
     stage('Build Go App') {
       steps {
         sh '''
-          cd filkompedia-be
           go mod init filkompedia-be || true
           go mod tidy
           GOOS=linux GOARCH=amd64 go build -o main .
