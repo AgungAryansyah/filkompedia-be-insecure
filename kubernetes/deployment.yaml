@@ -19,4 +19,4 @@ spec:
         - containerPort: 3002
         envFrom:
         - configMapRef:
-          name: filkompedia-env
+            name: filkompedia-env
