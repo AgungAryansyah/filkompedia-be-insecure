@@ -15,12 +15,6 @@ pipeline {
     }
 
    stage('Build Go App') {
-      agent {
-        docker {
-          image 'golang:1.23-alpine'
-          args '-v $HOME/go/pkg/mod:/go/pkg/mod'
-        }
-      }
       steps {
         sh '''
           go mod init filkompedia-be || true
