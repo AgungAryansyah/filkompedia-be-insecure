@@ -17,7 +17,7 @@ pipeline {
 
     stage('Build Docker Image') {
       steps {
-        sh 'docker build -t ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER} .'
+        sh 'docker build -t ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER} .'
       }
     }
 
@@ -26,7 +26,7 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: 'docker-registry-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
           sh '''
             echo "$PASS" | docker login ${REGISTRY} -u "$USER" --password-stdin
-	    docker tag ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER} ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER}
+	    docker tag ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER} ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER}
             docker push ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER}
             docker logout ${REGISTRY}
           '''
