@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: filkompedia-be
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: filkompedia-be
+  template:
+    metadata:
+      labels:
+        app: filkompedia-be
+    spec:
+      containers:
+      - name: filkompedia-be
+        image: docker.io/yogarn/filkompedia-be:__BUILD_NUMBER__
+        ports:
+        - containerPort: 3001

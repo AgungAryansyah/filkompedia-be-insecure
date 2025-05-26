@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: filkompedia-be
+spec:
+  type: NodePort
+  selector:
+    app: filkompedia-be
+  ports:
+    - port: 3001
+      targetPort: 3001
+      nodePort: 30080
