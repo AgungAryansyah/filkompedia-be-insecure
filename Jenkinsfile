@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    REGISTRY = "docker.io/yogarn"
+    REGISTRY = "yogarn"
     IMAGE_NAME = "filkompedia-be"
     BUILD_NUMBER = "${env.BUILD_NUMBER}"
   }
