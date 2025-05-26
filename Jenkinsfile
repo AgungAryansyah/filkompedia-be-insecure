@@ -37,6 +37,7 @@ pipeline {
     stage('Deploy to Kubernetes') {
       steps {
         sh '''
+	  kubectl apply -f env-configmap.yaml
           sed "s|__BUILD_NUMBER__|${BUILD_NUMBER}|g" ./kubernetes/deployment.yaml > ./kubernetes/deployment.generated.yaml
           kubectl apply -f ./kubernetes/deployment.generated.yaml
           kubectl apply -f ./kubernetes/service.yaml

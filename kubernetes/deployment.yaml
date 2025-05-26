@@ -17,6 +17,12 @@ spec:
         image: docker.io/yogarn/filkompedia-be:__BUILD_NUMBER__
         ports:
         - containerPort: 3002
-        envFrom:
-        - configMapRef:
-            name: filkompedia-env
+        volumeMounts:
+        - name: env-volume
+          mountPath: /app/.env
+          subPath: .env
+      volumes:
+      - name: env-volume
+        configMap:
+          name: filkompedia-env-file
+
