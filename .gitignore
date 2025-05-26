@@ -38,3 +38,9 @@ redis_data/
 
 #logs
 /logs
+
+#others
+.dccache
+.golangci.yaml
+golangci-lint.txt
+/.scannerwork
