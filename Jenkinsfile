@@ -26,7 +26,7 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: 'docker-registry-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
           sh '''
             echo "$PASS" | docker login --username="$USER" --password-stdin
-	    docker tag ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER} ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER}
+            docker tag ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER} ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER}
             docker push ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER}
             docker logout ${REGISTRY}
           '''
@@ -36,15 +36,17 @@ pipeline {
 
     stage('Deploy to Kubernetes') {
       steps {
-        sh '''
-	  kubectl create configmap filkompedia-env-file \
-		  --from-file=.env=.env \
-		  --dry-run=client -o yaml > kubernetes/env-configmap.yaml
-	  kubectl apply -f env-configmap.yaml
-          sed "s|__BUILD_NUMBER__|${BUILD_NUMBER}|g" ./kubernetes/deployment.yaml > ./kubernetes/deployment.generated.yaml
-          kubectl apply -f ./kubernetes/deployment.generated.yaml
-          kubectl apply -f ./kubernetes/service.yaml
-        '''
+        withCredentials([file(credentialsId: 'filkompedia-env', variable: 'ENV_FILE')]) {
+          sh '''
+            kubectl create configmap filkompedia-env-file \
+              --from-file=.env=$ENV_FILE \
+              --dry-run=client -o yaml | kubectl apply -f -
+
+            sed "s|__BUILD_NUMBER__|${BUILD_NUMBER}|g" ./kubernetes/deployment.yaml > ./kubernetes/deployment.generated.yaml
+            kubectl apply -f ./kubernetes/deployment.generated.yaml
+            kubectl apply -f ./kubernetes/service.yaml
+          '''
+        }
       }
     }
   }
