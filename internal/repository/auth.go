@@ -206,10 +206,10 @@ func (r *AuthRepository) ChangePassword(email, password string) error {
 }
 
 func (r *AuthRepository) CheckUserPassword(email, password string) (user *entity.User, err error) {
-	query := `SELECT * FROM users WHERE email = '` + email + `' AND password = '` + password + `'`
+	query := `SELECT * FROM users WHERE email = $1 AND password = $2`
 
 	user = &entity.User{}
-	err = r.db.Get(user, query)
+	err = r.db.Get(user, query, email, password)
 
 	if errors.Is(err, sql.ErrNoRows) {
 		return user, &response.UserNotFound
