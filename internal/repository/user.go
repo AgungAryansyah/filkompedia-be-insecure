@@ -87,9 +87,9 @@ func (r *UserRepository) UpdateRole(userId uuid.UUID, roleId int) error {
 }
 
 func (r *UserRepository) EditUser(edit *model.EditProfile) error {
-	query := `UPDATE users SET username = '` + edit.Username + `', profile_picture = '` + edit.ProfilePicture + `' WHERE id = '` + edit.Id.String() + `'`
+	query := `UPDATE users SET username = $1, profile_picture = $2 WHERE id = $3`
 
-	_, err := r.db.Exec(query)
+	_, err := r.db.Exec(query, edit.Username, edit.ProfilePicture, edit.Id)
 	return err
 }
 
