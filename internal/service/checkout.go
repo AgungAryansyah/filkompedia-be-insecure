@@ -71,7 +71,7 @@ func (s *CheckoutService) Checkout(checkoutReq model.CheckoutRequest, userId uui
 		}
 
 		if cart.UserId != userId {
-			return 0, errors.New("invalid input at " + cart_id.String() + " where it's not belong to the user")
+			return 0, errors.New("invalid input at " + cart_id.String() + " where its not belong to the user")
 		}
 
 		totalPrice += (float64(cart.Amount) * book.Price)
